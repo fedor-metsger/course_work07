@@ -1,6 +1,8 @@
 django
 djangorestframework
 djangorestframework-simplejwt
+django-cors-headers
+coverage
 psycopg2-binary
 gunicorn
 flake8

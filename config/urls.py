@@ -22,7 +22,7 @@ urlpatterns = [
     path("admin/", admin.site.urls),
     # path('', include('habits.urls', namespace='habit')),
     path('', include('users.urls', namespace='user')),
-    path('', include('habits.urls', namespace='habbit')),
+    path('', include('habits.urls', namespace='habit')),
 
     # path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
     # path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),

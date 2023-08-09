@@ -7,14 +7,14 @@ from habits.models import Habit
 class HabitLengthValidator():
     def __call__(self, value):
         length = dict(value).get("length")
-        if length > 120:
+        if isinstance(length, int) and length > 120:
             raise serializers.ValidationError("Длительность привычки не может быть больше 120 секунд")
 
 
 class HabitPeriodValidator():
     def __call__(self, value):
         period = dict(value).get("period")
-        if period > 7:
+        if isinstance(period, int) and period > 7:
             raise serializers.ValidationError("Привычка должна выполняться не реже, чем раз в 7 дней")
 
 
