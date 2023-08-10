@@ -2,6 +2,7 @@
 from rest_framework import viewsets, status, generics
 from rest_framework.response import Response
 
+from habits.tasks import check_habits
 from habits.telegram import send_message
 from users.models import User
 from users.permissions import UserPermission
@@ -31,7 +32,5 @@ class UserSendMessage(generics.CreateAPIView):
     serializer_class = MessageSerializer
 
     def perform_create(self, serializer):
-        username = self.request.user.telegram
-        print(f'Sending message: "{serializer.validated_data["content"]}" to user {username}.')
-        send_message(username, serializer.validated_data["content"])
+        check_habits()
 

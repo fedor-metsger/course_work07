@@ -8,3 +8,6 @@ gunicorn
 flake8
 python-dotenv
 requests
+celery
+redis
+django-celery-beat
