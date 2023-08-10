@@ -11,3 +11,4 @@ requests
 celery
 redis
 django-celery-beat
+drf-yasg

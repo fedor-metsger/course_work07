@@ -5,7 +5,6 @@ from celery import shared_task
 
 from habits.models import Habit
 from habits.telegram import send_message
-from users.models import User
 
 
 @shared_task

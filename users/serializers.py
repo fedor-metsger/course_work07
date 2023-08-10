@@ -15,5 +15,6 @@ class UserCreateSerializer(serializers.ModelSerializer):
         model = User
         fields = ["id", "telegram", "password", "first_name", "last_name"]
 
+
 class MessageSerializer(serializers.Serializer):
     content = serializers.CharField(max_length=200)

@@ -10,13 +10,15 @@ def get_updates(last_update):
     tg_token = os.getenv("TG_BOT_TOKEN")
     return requests.get(f'https://api.telegram.org/bot{tg_token}/getUpdates?offset={last_update + 1}').json()
 
+
 def parse_updates(updates: dict):
     for u in updates:
-        if User.objects.filter(telegram=username).exists():
-            user = User.objects.get(telegram=u["message"]["chat"]["username"])
+        user = User.objects.get(telegram=u["message"]["chat"]["username"])
+        if User.objects.filter(telegram=user).exists():
             user.chat_id = u["message"]["chat"]["id"]
             user.update_id = u["update_id"]
             user.save()
+
 
 def send_message(username, text):
     last_update = User.objects.aggregate(Max('update_id'))['update_id__max']

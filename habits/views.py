@@ -9,12 +9,18 @@ from habits.serializers import HabitSerializer
 
 
 class HabitListAPIView(generics.ListAPIView):
+    '''
+    Выводит список всех публичных привычек
+    '''
     queryset = Habit.objects.filter(public=True)
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
 
 
 class HabitListMyAPIView(generics.ListAPIView):
+    '''
+    Выводит список всех привычек авторизованного пользователя
+    '''
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
     pagination_class = HabitPaginator
@@ -24,6 +30,9 @@ class HabitListMyAPIView(generics.ListAPIView):
 
 
 class HabitCreateAPIView(generics.CreateAPIView):
+    '''
+    Создаёт новую привычку
+    '''
     serializer_class = HabitSerializer
     permission_classes = [IsAuthenticated]
 
@@ -34,18 +43,30 @@ class HabitCreateAPIView(generics.CreateAPIView):
 
 
 class HabitRetrieveAPIView(generics.RetrieveAPIView):
+    '''
+    Выводит информацию о конкретной привычке.
+    Доступна только для владельца привычки.
+    '''
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsOwner]
 
 
 class HabitUpdateAPIView(generics.UpdateAPIView):
+    '''
+    Вносит изменения в привычку.
+    Доступна только для владельца привычки.
+    '''
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsOwner]
 
 
 class HabitDestroyAPIView(generics.DestroyAPIView):
+    '''
+    Удаляет указанную привычку из БД.
+    Доступна только для владельца привычки.
+    '''
     serializer_class = HabitSerializer
     queryset = Habit.objects.all()
     permission_classes = [IsOwner]
