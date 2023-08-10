@@ -1,10 +1,11 @@
 
-from rest_framework import viewsets, status
+from rest_framework import viewsets, status, generics
 from rest_framework.response import Response
 
+from habits.telegram import send_message
 from users.models import User
 from users.permissions import UserPermission
-from users.serializers import UserSerializer, UserCreateSerializer
+from users.serializers import UserSerializer, UserCreateSerializer, MessageSerializer
 
 
 class UserViewSet(viewsets.ModelViewSet):
@@ -24,3 +25,13 @@ class UserViewSet(viewsets.ModelViewSet):
         user.save()
 
         return Response(serializer.data, status=status.HTTP_201_CREATED, headers=headers)
+
+
+class UserSendMessage(generics.CreateAPIView):
+    serializer_class = MessageSerializer
+
+    def perform_create(self, serializer):
+        username = self.request.user.telegram
+        print(f'Sending message: "{serializer.validated_data["content"]}" to user {username}.')
+        send_message(username, serializer.validated_data["content"])
+

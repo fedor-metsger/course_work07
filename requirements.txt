@@ -7,3 +7,4 @@ psycopg2-binary
 gunicorn
 flake8
 python-dotenv
+requests
